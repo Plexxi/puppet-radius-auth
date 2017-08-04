@@ -9,9 +9,9 @@
 # [pam_enable]
 #   If enabled (pam_enable => true) enables the RADIUS PAM module.
 #   *Optional* (defaults to true)
-# [server,secret,timeout]
-#   (Address,secret,timeout) of RADIUS servers.  Multiple entries may be set.
-#   **Required if pam_enable is true**
+# [server]
+#   array of structures {'addr','port','secret','timeout') of RADIUS servers.  Multiple entries may be set.
+#   *Optional*
 #
 # === Examples
 #
