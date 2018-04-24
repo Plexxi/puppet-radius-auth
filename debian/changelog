@@ -1,3 +1,9 @@
+puppet-module-plexxi-radius-auth (1.0.1) UNRELEASED; urgency=medium
+
+  * change hyphen in class name to underscore 
+
+ -- Matthew Morgan <matt.morgan@plexxi.com>  Tue, 24 Apr 2018 13:32:27 -0400
+
 puppet-module-plexxi-radius-auth (1.0.0) unstable; urgency=medium
 
   * Initial release.

@@ -19,8 +19,8 @@ set -e
 
 case "$1" in
     remove|upgrade|deconfigure)
-        update-alternatives --remove puppet-module-radius-auth \
-            /usr/share/puppet/modules.available/plexxi-radius-auth
+        update-alternatives --remove puppet-module-radius_auth \
+            /usr/share/puppet/modules.available/plexxi-radius_auth
     ;;
 
     failed-upgrade)

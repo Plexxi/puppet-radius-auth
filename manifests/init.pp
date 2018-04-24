@@ -15,7 +15,7 @@
 #
 # === Examples
 #
-#  class { 'radius-auth':
+#  class { 'radius_auth':
 #    pam_enable => true,
 #    server => [ { addr => '1.2.3.4',
 #                  secret => 'secret',
@@ -33,9 +33,9 @@
 #
 # === Copyright
 #
-# Copyright 2017 Matthew Morgan, Plexxi, Inc
+# Copyright 2018 Matthew Morgan, Plexxi, Inc
 #
-class radius-auth( 
+class radius_auth( 
   $pam_enable = true,
   $server     = [],
 ) {

@@ -20,8 +20,8 @@ set -e
 
 case "$1" in
     configure)
-        update-alternatives --install /usr/share/puppet/modules/radius-auth puppet-module-radius-auth \
-            /usr/share/puppet/modules.available/plexxi-radius-auth 500
+        update-alternatives --install /usr/share/puppet/modules/radius_auth puppet-module-radius_auth \
+            /usr/share/puppet/modules.available/plexxi-radius_auth 500
         ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
