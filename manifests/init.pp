@@ -1,4 +1,4 @@
-# == Class: radius-auth
+# == Class: radius_auth
 #
 # Puppet module to manage RADIUS PAM configuration.
 #
