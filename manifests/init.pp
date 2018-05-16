@@ -45,7 +45,7 @@ class radius_auth(
        owner   => 0,
        group   => 0,
        mode    => '0600',
-       content => template('radius-auth/pam_radius_auth.conf.erb'),
+       content => template('radius_auth/pam_radius_auth.conf.erb'),
      }
      exec { 'radius_pam_auth_update':
        environment => ["DEBIAN_FRONTEND=editor",
