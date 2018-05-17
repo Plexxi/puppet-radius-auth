@@ -36,31 +36,51 @@
 # Copyright 2018 Matthew Morgan, Plexxi, Inc
 #
 class radius_auth( 
-  $pam_enable = true,
-  $server     = [],
+  Boolean $pam_enable = true,
+  Array[Struct[{ addr => String,
+                 port => Optional[Integer],
+                 secret => String,
+                 timeout => Optional[Integer]
+                 }]] $server = [],
 ) {
-  if $pam_enable {
-     file { '/etc/pam_radius_auth.conf':
-       ensure  => file,
-       owner   => 0,
-       group   => 0,
-       mode    => '0600',
-       content => template('radius_auth/pam_radius_auth.conf.erb'),
-     }
-     exec { 'radius_pam_auth_update':
-       environment => ["DEBIAN_FRONTEND=editor",
-                       "PLEXXI_AUTH_UPDATE=radius",
-                       "PLEXXI_AUTH_ENABLE=1",
-                       "EDITOR=/opt/plexxi/bin/px-auth-update"],
-       command => '/usr/sbin/pam-auth-update',
-     }
-  } else {
-     exec { 'radius_pam_auth_update':
-       environment => ["DEBIAN_FRONTEND=editor",
-                       "PLEXXI_AUTH_UPDATE=radius",
-                       "PLEXXI_AUTH_ENABLE=0",
-                       "EDITOR=/opt/plexxi/bin/px-auth-update"],
-       command => '/usr/sbin/pam-auth-update',
-     }
-  }
+      $server.each |$value| {
+          if has_key($value, port) {
+              if is_integer($value[port]) {
+                  if ($value[port] < 1) or ($value[port] > 65535) {
+                      fail('port must be an integer from 1 to 65535')
+                  }
+              }
+              else {
+                  fail('port must be an integer')
+              }
+          }
+          if !has_key($value, addr) {
+              fail('addr must be provided for each server')
+          }
+      }
+
+      if $pam_enable {
+         file { '/etc/pam_radius_auth.conf':
+                ensure  => file,
+                owner   => 0,
+                group   => 0,
+                mode    => '0600',
+                content => template('radius_auth/pam_radius_auth.conf.erb'),
+         }
+         exec { 'radius_pam_auth_update':
+                 environment => ["DEBIAN_FRONTEND=editor",
+                                 "PLEXXI_AUTH_UPDATE=radius",
+                                 "PLEXXI_AUTH_ENABLE=1",
+                                 "EDITOR=/opt/plexxi/bin/px-auth-update"],
+                 command => '/usr/sbin/pam-auth-update',
+         }
+      } else {
+        exec { 'radius_pam_auth_update':
+               environment => ["DEBIAN_FRONTEND=editor",
+                               "PLEXXI_AUTH_UPDATE=radius",
+                               "PLEXXI_AUTH_ENABLE=0",
+                               "EDITOR=/opt/plexxi/bin/px-auth-update"],
+               command => '/usr/sbin/pam-auth-update',
+        }
+      }
 }

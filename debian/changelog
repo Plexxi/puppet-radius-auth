@@ -1,3 +1,9 @@
+puppet-module-plexxi-radius-auth (1.0.2) unstable; urgency=medium
+
+  * Fixes to support puppet 4.x 
+
+ -- Matthew Morgan <matt.morgan@plexxi.com>  Thu, 17 May 2018 15:08:39 -0400
+
 puppet-module-plexxi-radius-auth (1.0.1) unstable; urgency=medium
 
   * change hyphen in class name to underscore 

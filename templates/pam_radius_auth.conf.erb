@@ -6,6 +6,6 @@
 
 <% if @server -%>
 <% Array(@server).each do |serv| -%>
-<%= serv['addr'] -%><%= serv['port'] ? ':'+serv['port'] : '' -%>    <%= serv['secret'] -%>    <%= serv['timeout'] ? serv['timeout'] : '2' %>
+<%= serv['addr'] -%><%= serv['port'] ? ':'+"serv['port']" : '' -%>    <%= serv['secret'] -%>    <%= serv['timeout'] ? serv['timeout'] : '2' %>
 <% end -%>
 <%end -%>
